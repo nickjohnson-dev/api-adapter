@@ -1,15 +1,15 @@
 import { invert } from 'lodash/fp';
-import swapPaths from './swap-paths';
+import mapPaths from './map-paths';
 
 const createAdapter = pathMap => ({
   fromApi(apiObj) {
-    return this.swapPaths(pathMap, apiObj);
+    return this.mapPaths(pathMap, apiObj);
   },
 
-  swapPaths,
+  mapPaths,
 
   toApi(clientObj) {
-    return this.swapPaths(invert(pathMap), clientObj);
+    return this.mapPaths(invert(pathMap), clientObj);
   },
 });
 

@@ -1,5 +1,5 @@
 import test from 'ava';
-import swapPaths from './swap-paths';
+import mapPaths from './map-paths';
 
 test('should move values from key paths to value paths using given path map as reference', (t) => {
   const pathMap = {
@@ -14,7 +14,7 @@ test('should move values from key paths to value paths using given path map as r
     artist: 'Bill Evans',
     title: 'Blue in Green',
   };
-  const result = swapPaths(pathMap, original);
+  const result = mapPaths(pathMap, original);
   t.deepEqual(result, expected);
 });
 
@@ -33,7 +33,7 @@ test('should handle converting to nested values', (t) => {
     },
     title: 'Blue in Green',
   };
-  const result = swapPaths(pathMap, original);
+  const result = mapPaths(pathMap, original);
   t.deepEqual(result, expected);
 });
 
@@ -52,7 +52,7 @@ test('should handle converting from nested values', (t) => {
     artist: 'Bill Evans',
     title: 'Blue in Green',
   };
-  const result = swapPaths(pathMap, original);
+  const result = mapPaths(pathMap, original);
   t.deepEqual(result, expected);
 });
 
@@ -71,6 +71,9 @@ test('should retain values not included in path map when converting', (t) => {
     stars: 5,
     title: 'Blue in Green',
   };
-  const result = swapPaths(pathMap, original);
+  const result = mapPaths(pathMap, original);
   t.deepEqual(result, expected);
 });
+
+test.todo('handle array');
+test.todo('handle json string');
