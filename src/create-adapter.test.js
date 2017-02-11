@@ -1,101 +1,44 @@
 import test from 'ava';
+import sinon from 'sinon';
 import createAdapter from './create-adapter';
+import swapPaths from './swap-paths';
 
-test('fromApi should handle deep object', (t) => {
-  const keyMap = {
-    digits: 'phone.number',
-    phonePrefix: 'phone.areaCode',
-    knownBy: 'name',
-    'residenceIdentifier.road': 'address.street',
-    'residenceIdentifier.postalCode': 'address.zip',
-  };
-  const adapter = createAdapter(keyMap);
-  const user = {
-    digits: '555-1234',
-    knownBy: 'Nick',
-    phonePrefix: '123',
-    residenceIdentifier: {
-      road: 'Main Street',
-      postalCode: 90210,
-    },
-    untouched: true,
-  };
-  const expected = {
-    address: {
-      street: 'Main Street',
-      zip: 90210,
-    },
-    name: 'Nick',
-    phone: {
-      areaCode: '123',
-      number: '555-1234',
-    },
-    untouched: true,
-  };
-  const result = adapter.fromApi(user);
-  t.deepEqual(result, expected);
+test('should return object with swapPaths method equal to swapPaths function', (t) => {
+  const adapter = createAdapter({});
+  t.is(adapter.swapPaths, swapPaths);
 });
 
-test('toApi should handle deep object', (t) => {
-  const keyMap = {
-    digits: 'phone.number',
-    phonePrefix: 'phone.areaCode',
-    knownBy: 'name',
-    'residenceIdentifier.road': 'address.street',
-    'residenceIdentifier.postalCode': 'address.zip',
-  };
-  const adapter = createAdapter(keyMap);
-  const user = {
-    address: {
-      street: 'Main Street',
-      zip: 90210,
-    },
-    name: 'Nick',
-    phone: {
-      areaCode: '123',
-      number: '555-1234',
-    },
-    untouched: true,
-  };
-  const expected = {
-    digits: '555-1234',
-    knownBy: 'Nick',
-    phonePrefix: '123',
-    residenceIdentifier: {
-      road: 'Main Street',
-      postalCode: 90210,
-    },
-    untouched: true,
-  };
-  const result = adapter.toApi(user);
-  t.deepEqual(result, expected);
+test('should return object with fromApi method that invokes swapPaths with given path map', (t) => {
+  const pathMap = { title: 'name' };
+  const adapter = createAdapter(pathMap);
+  adapter.swapPaths = sinon.spy();
+  const source = { title: 'Blue in Green' };
+  adapter.fromApi(source);
+  t.deepEqual(adapter.swapPaths.lastCall.args, [pathMap, source]);
 });
 
-test.todo('should carry through properties that do not exist on keyMap');
-test.todo('fromApi single level');
-test.todo('toApi');
+test('should return object with fromApi method that returns the return value of swapPaths', (t) => {
+  const adapter = createAdapter({});
+  const swappedObject = { key: 'value' };
+  adapter.swapPaths = () => swappedObject;
+  const result = adapter.fromApi({});
+  t.deepEqual(result, swappedObject);
+});
 
-// eslint-disable-next-line
-// test.todo('toApi should return input object with keys renamed from client keys to api keys', (t) => {
-//   const keyMap = {
-//     first: 'ichiban',
-//     second: 'niban',
-//     third: 'sanban',
-//     fourth: 'shiban',
-//   };
-//   const adapter = createAdapter(keyMap);
-//   const favoriteRamen = {
-//     ichiban: 'Tonkotsu',
-//     niban: 'Miso',
-//     sanban: 'Shio',
-//     shiban: 'Shoyu',
-//   };
-//   const expected = {
-//     first: 'Tonkotsu',
-//     second: 'Miso',
-//     third: 'Shio',
-//     fourth: 'Shoyu',
-//   };
-//   const result = adapter.toApi(favoriteRamen);
-//   t.deepEqual(result, expected);
-// });
+test('should return object with toApi method that invokes swapPaths with inverted version ofgiven path map', (t) => {
+  const pathMap = { title: 'name' };
+  const invertedPathMap = { name: 'title' };
+  const adapter = createAdapter(pathMap);
+  adapter.swapPaths = sinon.spy();
+  const source = { title: 'Blue in Green' };
+  adapter.toApi(source);
+  t.deepEqual(adapter.swapPaths.lastCall.args, [invertedPathMap, source]);
+});
+
+test('should return object with toApi method that returns the return value of swapPaths', (t) => {
+  const adapter = createAdapter({});
+  const swappedObject = { key: 'value' };
+  adapter.swapPaths = () => swappedObject;
+  const result = adapter.toApi({});
+  t.deepEqual(result, swappedObject);
+});

@@ -1,1 +1,3 @@
-export createAdapter from './create-adapter';
+import createAdapter from './create-adapter';
+
+export { createAdapter };
