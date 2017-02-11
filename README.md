@@ -5,13 +5,13 @@ Allows you to easily convert unfortunately named properties on server responses.
 
 ## Installation
 
-```
+```bash
 npm install api-adapter
 ```
 
 ## Usage
 
-```
+```javascript
 import { createAdapter } from 'api-adapter';
 
 // Path Map Format:
