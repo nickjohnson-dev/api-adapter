@@ -13,7 +13,7 @@
   "keywords": [],
   "author": {
     "name": "Nick Johnson",
-    "email": "nickjohnson.dev@gmail.com",
+    "email": "nickjohnson.dev@gmail.com"
   },
   "license": "ISC",
   "bugs": {
@@ -27,13 +27,18 @@
     "babel-preset-es2015": "6.22.0",
     "babel-preset-es2016": "6.22.0",
     "babel-preset-es2017": "6.22.0",
+    "babel-preset-stage-3": "6.22.0",
     "eslint": "3.15.0",
     "eslint-config-airbnb-base": "11.1.0",
     "eslint-plugin-import": "2.2.0",
-    "eslint-plugin-lodash-fp": "2.1.3",
-    "lodash": "4.17.4"
+    "eslint-plugin-lodash-fp": "2.1.3"
   },
   "ava": {
-    "require": ["babel-register"]
+    "require": [
+      "babel-register"
+    ]
+  },
+  "dependencies": {
+    "lodash": "4.17.4"
   }
 }
