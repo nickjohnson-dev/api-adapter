@@ -15,7 +15,7 @@ npm install api-adapter
 
 ## Usage
 
-The helper `createAdapter` takes an object with keys equal to unwanted [https://lodash.com/docs#get](property paths) in your API response, and values equal to desired property paths to use in your client.
+The helper `createAdapter` takes an object with keys equal to unwanted [property paths](https://lodash.com/docs#get) in your API response, and values equal to desired property paths to use in your client.
 
 ```javascript
 import { createAdapter } from 'api-adapter';
@@ -25,7 +25,7 @@ const adapter = createAdapter({
 });
 ```
 
-The `fromApi` method will then convert your data into a pleasant format you can use in the client.
+The adapter's `fromApi` method will convert your data into a pleasant format you can use in the client.
 
 ```javascript
 const clientData = adapter.fromApi({
