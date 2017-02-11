@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/api-adapter.svg)](https://badge.fury.io/js/api-adapter)
+
 # api-adapter
 Decouple the shape of your data on the client and server.
 
