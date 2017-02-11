@@ -3,7 +3,7 @@
 # api-adapter
 Decouple the shape of your data on the client and server.
 
-Allows you to easily convert unfortunately named properties on server responses so that they're most pleasant to work with on the client. Even supports deep flattening and nesting of values.
+Allows you to easily convert unfortunately named properties on server responses so that they're more pleasant to work with on the client. Even supports deep flattening and nesting of values.
 
 Defining the mapping of server to client data in a single spot means no more renaming in hundreds of files when someone changes the property names on the backend.
 
