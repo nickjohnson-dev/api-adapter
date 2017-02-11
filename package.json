@@ -1,13 +1,13 @@
 {
   "name": "api-adapter",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Decouple the shape of your data on the client and server",
   "main": "dist/index.js",
   "scripts": {
     "build": "babel src --out-dir dist --ignore test.js",
     "clean": "rimraf dist",
     "prebuild": "npm run clean -s",
-    "prerelease": "npm run test -s && npm run build -s",
+    "prerelease": "npm run testonce -s && npm run build -s",
     "release": "npm publish",
     "test": "ava --watch",
     "testonce": "ava"
