@@ -75,5 +75,38 @@ test('should retain values not included in path map when converting', (t) => {
   t.deepEqual(result, expected);
 });
 
-test.todo('handle array');
-test.todo('handle json string');
+test('should map each object when given an array of objects', (t) => {
+  const pathMap = {
+    band: 'artist',
+    track: 'title',
+  };
+  const original = [
+    { band: 'ASIAN KUNG-FU GENERATION', track: 'Re:Re' },
+    { band: 'Bill Evans', track: 'Blue in Green' },
+  ];
+  const expected = [
+    { artist: 'ASIAN KUNG-FU GENERATION', title: 'Re:Re' },
+    { artist: 'Bill Evans', title: 'Blue in Green' },
+  ];
+  const result = mapPaths(pathMap, original);
+  t.deepEqual(result, expected, 'result should be deep equal to expected');
+});
+
+test('should map objects and allow non-objects to pass through when given an array of objects', (t) => {
+  const pathMap = {
+    band: 'artist',
+    track: 'title',
+  };
+  const original = [
+    { band: 'ASIAN KUNG-FU GENERATION', track: 'Re:Re' },
+    { band: 'Bill Evans', track: 'Blue in Green' },
+    3,
+  ];
+  const expected = [
+    { artist: 'ASIAN KUNG-FU GENERATION', title: 'Re:Re' },
+    { artist: 'Bill Evans', title: 'Blue in Green' },
+    3,
+  ];
+  const result = mapPaths(pathMap, original);
+  t.deepEqual(result, expected, 'result should be deep equal to expected');
+});

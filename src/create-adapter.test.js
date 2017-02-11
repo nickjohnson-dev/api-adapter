@@ -1,7 +1,7 @@
 import test from 'ava';
 import sinon from 'sinon';
-import createAdapter from './create-adapter';
 import mapPaths from './map-paths';
+import createAdapter from './create-adapter';
 
 test('should return object with mapPaths method equal to mapPaths function', (t) => {
   const adapter = createAdapter({});
