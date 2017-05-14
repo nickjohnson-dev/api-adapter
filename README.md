@@ -1,6 +1,7 @@
+# api-adapter
+
 [![npm version](https://badge.fury.io/js/api-adapter.svg)](https://badge.fury.io/js/api-adapter)
 
-# api-adapter
 Decouple the shape of your data on the client and server.
 
 Allows you to easily convert unfortunately named properties on server responses so that they're more pleasant to work with on the client. Even supports deep flattening and nesting of values.
